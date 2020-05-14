@@ -1,0 +1,42 @@
+name: goos-bookclub-auction-sniper
+
+type: rails
+
+up:
+  - homebrew:
+    - mysql-client@5.7:
+        or:        [mysql@5.7]
+        conflicts: [mysql-connector-c, mysql, mysql-client]
+    # - another_package
+  - ruby: 2.6.3
+  - node:
+      version: v10.18.0
+      yarn: 1.12.3
+  - bundler
+  - railgun
+  - database:
+      bootstrap: bin/rails db:create db:migrate db:schema:load
+      migrate: bin/rails db:migrate db:test:prepare
+      host: goos-bookclub-auction-sniper.railgun
+      user: root
+      password: ''
+      database: goos_bookclub_auction_sniper_development
+
+server:
+  port: 48680
+
+commands:
+  console: bin/rails console
+  test:
+    syntax:
+      argument: file
+      optional: args...
+    run:    bin/rails test
+
+# These use fuzzy-matching, so you can (e.g.) `dev open app`
+open:
+  "My Application": https://goos-bookclub-auction-sniper.myshopify.io
+  #ops:
+    # - https://datadog.link
+    # - https://bugsnag.link
+    # - https://kafka.link
