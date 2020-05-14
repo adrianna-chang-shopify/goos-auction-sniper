@@ -2,17 +2,18 @@ name: goos-bookclub-auction-sniper
 
 type: rails
 
+packages: |
+  with (import <nixpkgs> {}); rubyEnv {
+    name = "brdie";
+    ruby = ruby_2_6;
+    lockfile = ./Gemfile.lock;
+    extra = [ mysqlClient57 ];
+  }
+
 up:
-  - homebrew:
-    - mysql-client@5.7:
-        or:        [mysql@5.7]
-        conflicts: [mysql-connector-c, mysql, mysql-client]
-    # - another_package
-  - ruby: 2.6.3
   - node:
       version: v10.18.0
       yarn: 1.12.3
-  - bundler
   - railgun
   - database:
       bootstrap: bin/rails db:create db:migrate db:schema:load
@@ -21,6 +22,7 @@ up:
       user: root
       password: ''
       database: goos_bookclub_auction_sniper_development
+  - spring_restart
 
 server:
   port: 48680
