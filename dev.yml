@@ -34,6 +34,11 @@ commands:
       argument: file
       optional: args...
     run:    bin/rails test
+  system-test:
+    syntax:
+      argument: file
+      optional: args...
+    run:    bin/rails test:system
 
 # These use fuzzy-matching, so you can (e.g.) `dev open app`
 open:
