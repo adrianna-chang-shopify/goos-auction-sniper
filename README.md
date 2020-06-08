@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Repo for working through the Growing Object Oriented Software Guided by Tests
+(GOOS) as a rails app
 
-Things you may want to cover:
+## Setup:
 
-* Ruby version
+Run: `$ dev up`
 
-* System dependencies
+## Running tests
 
-* Configuration
+System tests can be run with the command
+`$ dev system-test`
 
-* Database creation
+All other tests can be run with the command
 
-* Database initialization
+`$ dev test`
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
