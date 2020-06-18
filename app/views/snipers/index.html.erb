@@ -1,0 +1,8 @@
+<ul>
+  <% @snipers.each do |sniper| %>
+    <li id="auction-item-<%= sniper.item_id %>">
+      <div>item: <span><%= sniper.item_id %></span></div>
+      <div>status: <span id="bidding-status"><%= sniper.status %></span></div>
+    </li>
+  <% end %>
+</ul>

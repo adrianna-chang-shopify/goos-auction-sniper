@@ -1,0 +1,5 @@
+<%= form_with model: @sniper, id: 'new-sniper' do |form| %>
+  <%= form.text_field :item_id, id: 'new-sniper--item-id' %>
+
+  <%= form.submit 'Join', id: 'join-auction' %>
+<% end %>

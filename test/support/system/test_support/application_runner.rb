@@ -20,7 +20,7 @@ module TestSupport
 
     def start_bidding_in(auction)
       create_sniper auction.item_id  # similar to starting the application with an auction_id
-      shows_auction_status("StatusForJoining")
+      shows_auction_status(Sniper::JOINING)
     end
 
     def stop
@@ -31,13 +31,13 @@ module TestSupport
     private
 
     def shows_auction_status(status)
-      assertions.assert_equal status, find("css-lookup-for-status").text
+      assertions.assert_equal status, find("#bidding-status").text
     end
 
     def create_sniper(item_id)
-      visit 'path/to/create'
-      fill_in 'form_id', with: item_id
-      click_button('button-identifier')
+      visit 'snipers/new'
+      fill_in 'new-sniper--item-id', with: item_id
+      click_button('join-auction')
     end
   end
 end
