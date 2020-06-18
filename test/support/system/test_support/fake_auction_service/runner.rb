@@ -19,6 +19,10 @@ module TestSupport
         @item_id = item_id
       end
 
+      def start_selling_item
+        @server.auction_id = @item_id
+      end
+
       def stop
         @server.quit!
         @server_thread.join
