@@ -18,7 +18,11 @@ class SnipersController < ApplicationController
   end
 
   def callback
-    raise "not done"
+    sniper = Sniper.find(params[:id])
+    sniper.close_auction
+    sniper.save
+
+    head :ok
   end
 
   private

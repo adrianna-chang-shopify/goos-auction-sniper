@@ -23,6 +23,11 @@ module TestSupport
       shows_auction_status(Sniper::JOINING)
     end
 
+    def show_sniper_has_lost_auction
+      visit "/snipers"
+      shows_auction_status(Sniper::LOST)
+    end
+
     def stop
       # noop rails system test takes care of starting and stopping the rails
       # server

@@ -1,9 +1,14 @@
 class Sniper < ApplicationRecord
   STATUSES = [
-    JOINING = 'joining'
+    JOINING = 'joining',
+    LOST = 'lost',
   ].freeze
 
   after_commit :queue_join
+
+  def close_auction
+    self.status = LOST
+  end
 
   private
 
