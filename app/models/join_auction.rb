@@ -14,7 +14,7 @@ class JoinAuction
       headers: { 'X_BIDDER_IDENTITY' => 'abcd-123' },
     )
 
-    response = conn.post("auction/#{sniper.item_id}/join")
+    response = conn.post("auction/#{sniper.item_id}/join", "callback_url=#{callback_sniper_url(sniper)}")
 
     if response.status != 200
       raise "failed to complete"

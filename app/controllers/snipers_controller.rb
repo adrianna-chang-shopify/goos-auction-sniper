@@ -17,6 +17,10 @@ class SnipersController < ApplicationController
     @snipers = Sniper.all
   end
 
+  def callback
+    raise "not done"
+  end
+
   private
 
   def sniper_params

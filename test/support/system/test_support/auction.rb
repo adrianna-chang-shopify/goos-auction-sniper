@@ -3,12 +3,11 @@
 module TestSupport
   class Auction
     attr_reader :item_id
-    attr_reader :bidder_ids
+    attr_reader :bidders
 
     def initialize(item_id:)
       @item_id = item_id
-      @bidder_ids = Set.new
+      @bidders = Set.new
     end
   end
-
 end

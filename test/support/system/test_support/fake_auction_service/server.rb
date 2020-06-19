@@ -35,7 +35,9 @@ module TestSupport
       post '/auction/:id/join' do
         if params['id'] == self.class.auction.item_id
           bidder_id = request.env["HTTP_X_BIDDER_IDENTITY"]
-          self.class.auction.bidder_ids << bidder_id
+          callback_url = params['callback_url']
+          self.class.auction.bidders << Bidder.new(identifier: bidder_id, callback_url: callback_url)
+
           'joined'
         else
           not_found do

@@ -29,9 +29,15 @@ module TestSupport
 
       def has_received_join_request_from_sniper
         repeat_check_with_timeout do
-          @server.auction.bidder_ids.include?('abcd-123')
+          @server.auction.bidders.include?(Bidder.new(identifier: 'abcd-123'))
         end
-        @assertions.assert_includes @server.auction.bidder_ids, 'abcd-123'
+        @assertions.assert_includes @server.auction.bidders, Bidder.new(identifier: 'abcd-123')
+      end
+
+      def announce_closed
+        @server.auction.bidders.each do |bidder|
+          Faraday.post(bidder.callback_url, 'closed')
+        end
       end
 
       def stop
