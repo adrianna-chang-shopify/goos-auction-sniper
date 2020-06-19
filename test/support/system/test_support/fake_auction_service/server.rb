@@ -8,7 +8,7 @@ module TestSupport
     class Server < Sinatra::Base
       def self.clear
         @bidder_ids = nil
-        @auction_id = nil
+        @auction = nil
       end
 
       def self.register_bidder_identity(identity)
@@ -20,11 +20,11 @@ module TestSupport
       end
 
       def self.auction_id=(item_id)
-        @auction_id = item_id
+        @auction = Auction.new(item_id: item_id)
       end
 
       def self.auction
-        @auction_id
+        @auction
       end
 
       before do
@@ -33,7 +33,9 @@ module TestSupport
       end
 
       post '/auction/:id/join' do
-        if params['id'] == self.class.auction_id
+        if params['id'] == self.class.auction.item_id
+          bidder_id = request.env["HTTP_X_BIDDER_IDENTITY"]
+          self.class.auction.bidder_ids << bidder_id
           'joined'
         else
           not_found do

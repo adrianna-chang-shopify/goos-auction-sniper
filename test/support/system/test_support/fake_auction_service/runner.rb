@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require_relative '../repeated_check'
+
 module TestSupport
   module FakeAuctionService
     class Runner
+      include RepeatedCheck
+
       attr_reader :item_id
 
       def initialize(item_id, assertions)
@@ -21,6 +25,13 @@ module TestSupport
 
       def start_selling_item
         @server.auction_id = @item_id
+      end
+
+      def has_received_join_request_from_sniper
+        repeat_check_with_timeout do
+          @server.auction.bidder_ids.include?('abcd-123')
+        end
+        @assertions.assert_includes @server.auction.bidder_ids, 'abcd-123'
       end
 
       def stop
