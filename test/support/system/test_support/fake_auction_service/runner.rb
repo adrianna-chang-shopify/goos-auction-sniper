@@ -20,7 +20,11 @@ module TestSupport
       end
 
       def stop
+        puts "Stopping server"
+        wait_for_server_to_start
+
         @server.quit!
+        puts "------- Stopping auction service server thread -------"
         @server_thread.join
       end
 
@@ -29,11 +33,18 @@ module TestSupport
       def start_server
         Thread.new do
           begin
+            puts "------- Thread: running auction service server -------"
             @server.run!
           rescue StandardError => e
             $stderr << e.message
             $stderr << e.backtrace.join("\n")
           end
+        end
+      end
+
+      def wait_for_server_to_start
+        while !@server.running_server? do
+          sleep 1
         end
       end
     end
