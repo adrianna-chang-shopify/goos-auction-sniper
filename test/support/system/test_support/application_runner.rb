@@ -16,15 +16,16 @@ module TestSupport
       # test class will allow us to call all assertions and see the
       # count of assertions in the console output.
       @assertions = assertions
+      start_server
     end
 
     def start_bidding_in(auction)
-      create_sniper auction.item_id  # similar to starting the application with an auction_id
+      create_sniper auction.item_id # similar to starting the application with an auction_id
       shows_auction_status(Sniper::JOINING)
     end
 
     def show_sniper_has_lost_auction
-      visit "/snipers"
+      visit '/snipers'
       shows_auction_status(Sniper::LOST)
     end
 
@@ -35,8 +36,16 @@ module TestSupport
 
     private
 
+    def start_server
+      Capybara.app = Rack::Builder.new do
+        run Rails.application
+      end
+      Capybara.server = :puma
+      Capybara.always_include_port = true
+    end
+
     def shows_auction_status(status)
-      assertions.assert_equal status, find("#bidding-status").text
+      assertions.assert_equal status, find('#bidding-status').text
     end
 
     def create_sniper(item_id)

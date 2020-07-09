@@ -60,3 +60,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'shopify-cloud', source: 'https://packages.shopify.io/shopify/gems'
+
+gem "solargraph", "~> 0.39.11"

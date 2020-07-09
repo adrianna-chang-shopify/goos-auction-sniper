@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative '../repeated_check'
+require_relative '../auction'
+require_relative '../bidder'
 
 module TestSupport
   module FakeAuctionService
@@ -49,12 +51,10 @@ module TestSupport
 
       def start_server
         Thread.new do
-          begin
-            @server.run!
-          rescue StandardError => e
-            $stderr << e.message
-            $stderr << e.backtrace.join("\n")
-          end
+          @server.run!
+        rescue StandardError => e
+          $stderr << e.message
+          $stderr << e.backtrace.join("\n")
         end
       end
     end
