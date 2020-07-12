@@ -3,6 +3,8 @@
 Repo for working through the Growing Object Oriented Software Guided by Tests
 (GOOS) as a rails app
 
+Personal version for Adrianna Chang -- see original repository here: https://github.com/Shopify/goos-bookclub-auction-sniper
+
 ## Setup:
 
 Run: `$ dev up`
